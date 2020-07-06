@@ -25,19 +25,19 @@ After completeing the coding portion of the challenge, please answer the followi
 
 **What was the most difficult part of the coding challenge for you? What was the easiest?**
 
-_Add your answer here_
+_Easiest Part was creating the react components and hardest part was getting the database to work_
 
 **If there’s one thing you could change about the starter code that was given to you, what would you change and why?**
 
-_Add your answer here_
+_Starter code is fine , It would be great to have more detailed instructions and documentation_
 
 **If a product manager asked you to implement the replies feature for a real product, what questions would you ask them? Explain your rationale.**
 
-_Add your answer here_
+_for a real product functionality we cloud use web services and APIs and allow multiple users to edit in real time as collaborators, without delay._
 
 **What considerations would you make if you were asked to modify this comment system to support 1000 comments? How about 1 million? (Be as specific as possible about what changes you would make to the backend, frontend, deployment, etc.)**
 
-_Add your answer here_
+_For the backend we should use cloud a database system no.For the frontend, we can should add pagination, sort filters for newest and top comments_
 
 ## :file_folder: Project Structure
 
