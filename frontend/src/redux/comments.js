@@ -2,12 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 
 import * as CommentsService from "../services/comments";
 
-export const actionTypes = {
-  FETCH_COMMENTS: `comments/FETCH_COMMENTS`,
-  FETCH_COMMENTS_SUCCESS: `comments/FETCH_COMMENTS_SUCCESS`,
-  FETCH_COMMENTS_FAILURE: `comments/FETCH_COMMENTS_FAILURE`,
-  CREATE_COMMENT: `comments/CREATE_COMMENT`,
-};
+import * as actionTypes from './actionTypes';
 
 export function fetchComments() {
   return {
@@ -30,13 +25,12 @@ export function fetchCommentsFailure(error) {
   };
 }
 
-export function createComment(userId, content, comment_id) {
+export function createComment(userId, content, commentId) {
   return {
     type: actionTypes.CREATE_COMMENT,
     payload: {
       userId,
-      content,
-      comment_id,
+      content,   
     },
   };
 }
@@ -79,8 +73,8 @@ function* fetchCommentsSagaWorker() {
 }
 
 function* createCommentSagaWorker(action) {
-  const { userId, content, comment_id } = action.payload;
-  yield call(CommentsService.createComment, userId, content, comment_id);
+  const { userId, content } = action.payload;
+  yield call(CommentsService.createComment, userId, content);
   yield call(fetchCommentsSagaWorker);
 }
 

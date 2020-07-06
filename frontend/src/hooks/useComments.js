@@ -15,8 +15,8 @@ function useComments() {
     dispatch(fetchComments());
   }, [dispatch]);
 
-  const createComment = (userId, content, comment_id) =>
-    dispatch(_createComment(userId, content, comment_id));
+  const createComment = (userId, content) =>
+    dispatch(_createComment(userId, content));
 
   return { comments, createComment };
 }

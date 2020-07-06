@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import autosize from "autosize";
-
-import useComments from "../../hooks/useComments";
 import useUsers from "../../hooks/useUsers";
 import "../App/App.css";
 
-function CommentComposer({parentComment}) {
-  const { createComment } = useComments();
+const CommentComposer = (props) => {
+  const { contentType, handleSubmit } = props;
   const { users } = useUsers();
   const textareaRef = useRef();
-
   const [userId, setUserId] = useState(null);
   const [content, setContent] = useState("");
-  const [parent, setParent] = useState(null);
+
 
   useEffect(() => {
     autosize(textareaRef.current);
@@ -24,17 +21,12 @@ function CommentComposer({parentComment}) {
     }
   }, [users]);
 
-  useEffect(() => {
-    if (parentComment) {
-      setParent(parentComment);
-    }
-  }, [parentComment]);
 
   const handleContentChange = (e) => setContent(e.target.value);
 
   const handleUserChange = (e) => setUserId(parseInt(e.target.value));
 
-  const handleSubmit = useCallback(
+  const commentSubmit = useCallback(
     (e) => {
       e.preventDefault();
 
@@ -43,33 +35,25 @@ function CommentComposer({parentComment}) {
         return;
       }
 
-      if (parent) {
-        createComment(userId, content, parent.id);
-      } else {
-        createComment(userId, content, null);
-      }
+      else if (userId) {
+        handleSubmit(userId, content);
+        setContent(""); }
+      },
 
-      setContent("");
-      setParent(null);
-    },
-    [userId, content, parent, createComment]
+    [userId, content,handleSubmit]
   );
 
-  const composeHeading = parent
-    ? `Replying to ${parent.user.name} #${parent.id}`
-    : 'You say...';
 
   return (
     <section className="compose">
       <h2 className="compose__heading">
-        {composeHeading}
+      {contentType.includes("comment") ? "You say..." : "Reply"}
       </h2>
-
-      <form className="compose__body" onSubmit={handleSubmit}>
+      <form className="compose__body" onSubmit={commentSubmit}>
         <textarea
           ref={textareaRef}
           rows={4}
-          placeholder="Enter some text"
+          placeholder="Enter some text" 
           required
           autoFocus
           value={content}
@@ -77,7 +61,7 @@ function CommentComposer({parentComment}) {
           className="compose__textarea"
         />
         <div className="compose__dropdown">
-          <label htmlFor="user-select">Comment as</label>
+          <label htmlFor="user-select">{contentType} as </label> 
           <select
             id="user-select"
             onChange={handleUserChange}
@@ -89,6 +73,7 @@ function CommentComposer({parentComment}) {
               </option>
             ))}
           </select>
+          
         </div>
         <div className="compose__button">
           <button className="button button--primary">Submit</button>

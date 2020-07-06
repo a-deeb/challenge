@@ -1,16 +1,16 @@
 import Axios from "axios";
 
 export async function getComments() {
-  const res = await Axios.get("http://localhost:3001/comments");
+  const res = await Axios.get("/comments");
   const comments = res.data;
   return comments;
 }
 
 export async function createComment(userId, content, commentId) {
-  const res = await Axios.post("http://localhost:3001/comments", {
+  const res = await Axios.post("/comments", {
     user_id: userId,
     content: content,
-    comment_id: commentId,
+ 
   });
   const comment = res.data;
   return comment;

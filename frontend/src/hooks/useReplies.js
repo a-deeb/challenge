@@ -8,16 +8,16 @@ import {
   createReply as _createReply,
 } from "../redux/replies";
 
-function useReplies() {
+function useReplies(commentId) {
   const dispatch = useDispatch();
   const replies = useSelector(repliesSelector);
   
   useEffect(() => {
-    dispatch(fetchReplies());
-  }, [dispatch]);
+    dispatch(fetchReplies(commentId));
+  }, [dispatch, commentId]);
 
-  const createReply = (userId, comment_id, content) =>
-    dispatch(_createReply(userId, comment_id, content));
+  const createReply = (userId, commentId, content) =>
+    dispatch(_createReply(userId, commentId, content));
   
   return { replies, createReply };
 }

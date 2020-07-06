@@ -1,22 +1,24 @@
 import React from "react";
 import useReplies from "../../hooks/useReplies";
 import Reply from "./Reply";
+import Composer from "../Composer/Composer";
+import "../App/App.css";
 
-function ReplyList( props ){
-    const {replies} = useReplies();
+
+const ReplyList = ( props ) => {
+    const { commentId } = props;
+    const {replies,createReply} = useReplies(commentId);
     
-    const getMyReplies = (reply) => {
-        return reply.comment_id === props.id
-    }
+    const handleSubmit = (userId, content) => 
+    createReply(userId, commentId, content);
     return(
-        <div>
-            
-            {
-                [...replies]
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .filter(getMyReplies)
+        <div>   
+        
+        <Composer contentType={"Reply"} handleSubmit={handleSubmit}></Composer>        
+            {[...replies]
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))           
                 .map((reply)=>{
-                    return <Reply reply={reply}/>
+                    return <Reply key={reply.id}  reply={reply}/>
                 })
             }
             

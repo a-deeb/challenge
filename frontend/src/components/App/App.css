@@ -187,3 +187,59 @@
   margin-top: 20px;
 }
 
+
+
+.replies > * + * {
+  margin-top: 20px;
+}
+
+.reply {
+  border: solid;
+}
+
+
+.reply__button__text {
+  color: rgb(177, 174, 174)
+}
+
+.reply__button__text:after {
+  font-size: large;
+  content: ' \02C5';
+  color: black;
+  padding-left: 10px;
+}
+
+.active, .collapsible {
+  background-color: rgb(135,206,250);
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: rgb(182, 179, 179);
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+
+

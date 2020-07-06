@@ -2,11 +2,8 @@ import { call, put, takeLatest } from "redux-saga/effects";
 
 import * as UsersService from "../services/users";
 
-export const actionTypes = {
-  FETCH_USERS: `users/FETCH_USERS`,
-  FETCH_USERS_SUCCESS: `users/FETCH_USERS_SUCCESS`,
-  FETCH_USERS_FAILURE: `users/FETCH_USERS_FAILURE`,
-};
+
+import * as actionTypes from './actionTypes';
 
 export function fetchUsers() {
   return {

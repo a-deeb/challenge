@@ -20,4 +20,16 @@ model comment {
   user_id    Int
   user       user      @relation(fields: [user_id], references: [id])
   comment_id Int?
+  replies    reply[]
+}
+
+
+model reply {
+  content    String    @default("")
+  created_at DateTime? @default(now())
+  id         Int       @default(autoincrement()) @id
+  user_id    Int
+  user       user      @relation(fields: [user_id], references: [id])
+  comment_id Int
+  comment    comment    @relation(fields: [comment_id], references: [id])
 }
